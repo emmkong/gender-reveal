@@ -1,5 +1,6 @@
 // src/GenderRevealGame.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+// import { useTrail, a } from "@react-spring/web";
 import "./GenderRevealGame.css";
 import SelectGender from "./SelectGender";
 import boyBoard from "./predefined/boy";
@@ -47,8 +48,7 @@ function GenderRevealGame() {
 
       // Wait for 5 seconds and then replace the page with the image
       setTimeout(() => {
-        const imageUrl =
-          result === "🎀" ? "/public/girl.png" : "/public/boy.png";
+        const imageUrl = result === "🎀" ? "/girl.png" : "/boy.png";
         document.body.innerHTML = `
           <img src="${imageUrl}" alt="Result Image" style="width:100vw; height:100vh; object-fit:cover;">
         `;
