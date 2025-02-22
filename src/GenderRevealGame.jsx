@@ -1,5 +1,6 @@
 // src/GenderRevealGame.jsx
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 // import { useTrail, a } from "@react-spring/web";
 import "./GenderRevealGame.css";
 import SelectGender from "./SelectGender";
@@ -11,7 +12,7 @@ const messageMap = {
   "🍼": "蓝色统治世界！准备迎接一个小王子！👑",
 };
 
-function GenderRevealGame() {
+const GenderRevealGame = ({ onNext }) => {
   const [predefinedBoard, setPredefinedBoard] = useState(null); // All cards closed initially
   const [board, setBoard] = useState(Array(9).fill(null)); // All cards closed initially
   const [message, setMessage] = useState("");
@@ -48,11 +49,12 @@ function GenderRevealGame() {
 
       // Wait for 5 seconds and then replace the page with the image
       setTimeout(() => {
-        const imageUrl = result === "🎀" ? "/girl.png" : "/boy.png";
-        document.body.innerHTML = `
-          <img src="${imageUrl}" alt="Result Image" style="width:100vw; height:100vh; object-fit:cover;">
-        `;
-      }, 5000);
+        onNext(result);
+        // const imageUrl = result === "🎀" ? "./girl.png" : "./boy.png";
+        // document.body.innerHTML = `
+        //   <img src="${imageUrl}" alt="Result Image" style="width:100vw; height:100vh; object-fit:cover;">
+        // `;
+      }, 2000);
     }
   };
 
@@ -103,6 +105,10 @@ function GenderRevealGame() {
       </button>
     </div>
   );
-}
+};
+
+GenderRevealGame.propTypes = {
+  onNext: PropTypes.func.isRequired,
+};
 
 export default GenderRevealGame;
